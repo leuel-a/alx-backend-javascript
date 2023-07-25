@@ -1,4 +1,4 @@
-# ES6 - Basics
+# ES6 - Basic
 
 In this project, we have explored the new ES6 standard for javascript and also touched up on small concepts in `npm` and how to manage packages in javascript
 

@@ -8,8 +8,16 @@ export class HolbertonClass {
     return this._year;
   }
 
+  set year(year) {
+    this._year = year;
+  }
+
   get location() {
     return this._location;
+  }
+
+  set location(location) {
+    this._location = location;
   }
 }
 
@@ -20,15 +28,35 @@ export class StudentHolberton {
     this._holbertonClass = holbertonClass;
   }
 
-  get fullName() {
+  fullName() {
     return `${this._firstName} ${this._lastName}`;
+  }
+
+  get firstName() {
+    return this._firstName;
+  }
+
+  set firstName(firstName) {
+    this._firstName = firstName;
+  }
+
+  get lastName() {
+    return this._lastName;
+  }
+
+  set lastName(lastName) {
+    this._lastName = lastName;
   }
 
   get holbertonClass() {
     return this.holbertonClass;
   }
 
-  get fullStudentDescription() {
+  set holbertonClass(holbertonClass) {
+    this._holbertonClass = holbertonClass;
+  }
+
+  fullStudentDescription() {
     return `${this._firstName} ${this._lastName} - ${this._holbertonClass.year} - ${this._holbertonClass.location}`;
   }
 }

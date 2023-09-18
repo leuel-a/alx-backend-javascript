@@ -1,6 +1,6 @@
 /**
  * Displays a message to the STDOUT
- * 
+ *
  * @param {string} message
  * @return {void}
  */

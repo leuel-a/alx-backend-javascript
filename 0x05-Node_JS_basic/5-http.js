@@ -7,6 +7,7 @@ const app = http.createServer(async (req, res) => {
     res.write('Hello Holberton School!');
     res.end();
   } else if (req.url === '/students') {
+    res.setHeader('Content-Type', 'text/plain')
     const originalConsoleLog = console.log;
 
     const captures = ['This is the list of our students'];

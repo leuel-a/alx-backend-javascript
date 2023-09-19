@@ -17,7 +17,6 @@ const app = http.createServer(async (req, res) => {
     try {
       await countStudents('database.csv');
     } catch (error) {
-      captures.length = 0;
       captures.push(error);
     }
     console.log = originalConsoleLog;

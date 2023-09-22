@@ -1,6 +1,5 @@
 const calculateNumber = require('./1-calcul');
-const assert = require('assert');
-const expect = require('chai').expect;
+const { expect } = require('chai');
 
 describe('calculateNumber', () => {
   describe('SUM', () => {

@@ -6,6 +6,9 @@ const rl = readline.createInterface({
 
 rl.question('Welcome to Holberton School, what is your name?\n', (ans) => {
   console.log(`Your name is: ${ans}`);
-  console.log('This important software is now closing');
   rl.close();
+});
+
+rl.on('close', () => {
+  console.log('This important software is now closing');
 });

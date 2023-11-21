@@ -23,14 +23,11 @@ const app = http.createServer(async (req, res) => {
       const data = await getStudents(fileName);
 
       const lines = data.split(/\r?\n/).filter((line) => line);
-
       if (lines.length === 0) {
         res.end('The database is empty');
       }
 
-      // Remove the header
       const students = lines.slice(1);
-
       if (students.length === 0) {
         res.end('Number of students: 0');
       }
@@ -59,6 +56,7 @@ const app = http.createServer(async (req, res) => {
           res.write(line); // No newline character for the last line
         }
       });
+
       res.end();
     } catch (error) {
       res.end('Cannot load the database');

@@ -4,23 +4,44 @@ function countStudents(path) {
   return new Promise((resolve, reject) => {
     fs.readFile(path, 'utf-8', (err, data) => {
       if (err) {
-        reject(Error('Cannot load the database'));
+        return reject(Error('Cannot load the database'));
       }
-      const dataFromFile = fs.readFileSync(path, 'utf8')
-          .replace(/\r/gm, ''),
-        dataArr = dataFromFile.split('\n'),
-        students = dataArr.map((item) => item.split(','))
-          .filter((item) => item.length === 4).slice(1),
-        CS = students.filter((item) => item[3] === 'CS')
-          .map(student => student[0]),
-        SWE = students.filter((item) => item[3] === 'SWE')
-          .map(student => student[0]);
+      const lines = data.split(/\r?\n/).filter((line) => line);
+
+      if (lines.length === 0) {
+        return reject(Error('The database is empty'));
+      }
+
+      // Remove the header
+      const students = lines.slice(1);
+
+      if (students.length === 0) {
+        console.log('Number of students: 0');
+        return reject(Error('No students in the database'));
+      }
+
+      const fieldCounts = new Map();
+      students.forEach((student) => {
+        const [firstName, , , field] = student.split(',');
+
+        if (!fieldCounts.has(field)) {
+          fieldCounts.set(field, [firstName]);
+        } else {
+          fieldCounts.get(field).push(firstName);
+        }
+      });
 
       console.log(`Number of students: ${students.length}`);
-      console.log(`Number of students in CS: ${CS.length}. List: ${CS.join(',')}`);
-      console.log(`Number of students in SWE: ${SWE.length}. List: ${SWE.join(',')}`);
 
-      resolve();
+      fieldCounts.forEach((students, field) => {
+        console.log(
+          `Number of students in ${field}: ${
+            students.length
+          }. List: ${students.join(', ')}`,
+        );
+      });
+
+      return resolve();
     });
   });
 }

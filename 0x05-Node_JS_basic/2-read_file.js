@@ -8,23 +8,23 @@ function countStudents(path) {
       .slice(1)
       .filter((line) => line && !line.match(/^,+$|^\s+$/));
     const students = dataArr.map((line) => line.split(','));
-    const fields = new Map();
+    const fields = {};
 
     for (const student of students) {
-      const field = student[3];
-      if (!fields.has(field)) fields.set(field, []);
-      fields.get(field).push(student[0]);
+      if (student[3] in fields === false) fields[student[3]] = [];
+
+      fields[student[3]] = [...fields[student[3]], student[0]];
     }
 
-    // TODO: Iterate over the fields Map object and print the number of students per field
+    const fieldsKeys = Object.keys(fields);
+
     console.log(`Number of students: ${students.length}`);
-    for (const [field, value] of fields) {
+    fieldsKeys.forEach((key) => {
+      const val = fields[key];
       console.log(
-        `Number of students in ${field}: ${value.length}. List: ${value.join(
-          ', ',
-        )}`,
+        `Number of students in ${key}: ${val.length}. List: ${val.join(', ')}`,
       );
-    }
+    });
   } catch (err) {
     console.log('Cannot load the database');
   }

@@ -6,7 +6,7 @@ function countStudents(path) {
     const dataArr = data
       .split(/\r\n/)
       .slice(1)
-      .filter((line) => line);
+      .filter((line) => line && !line.match(/^,+$|^\s+$/));
     const students = dataArr.map((line) => line.split(','));
     const fields = new Map();
 
